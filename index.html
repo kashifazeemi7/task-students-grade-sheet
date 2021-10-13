@@ -14,14 +14,14 @@
 <body>
     <h1 class="display-4 text-center mt-4"> Student Marksheet Generator</h1>
     <div class="container mt-5">
-        <h3 class="text-center display-6">Enter the details below (marks are out of 100 for each sub) </h3>
+        <h3 class="text-center display-6">Enter the details below (score out of 100) </h3>
         
 
         
     </div>
 
     <div class="container text-center">
-        <h3 class="display-6 text-center mt-3" id="input-marks"> </h3>
+        <h3 class="display-6 text-center mt-3" > </h3>
 
         <table class="table table-striped"> 
             <tr>
@@ -34,38 +34,113 @@
             </tr>
            
             <tr>
-                <td><h4 class="" >Enter Marks for English </h4></td>
+                <td><h4 class="" > English </h4></td>
                 <td><input type="number" name="" id="marks-eng"></td>
             </tr>
             <tr>
-                <td> <h4 class="" >Enter Marks for Math</h4></td>
+                <td> <h4 class="" > Math</h4></td>
                 <td><input type="number" name="" id="marks-math"></td>
             </tr>
             <tr>
-                <td>  <h4 class="" >Enter Marks for Urdu</h4></td>
+                <td>  <h4 class="" > Urdu</h4></td>
                 <td><input type="number" name="" id="marks-urdu"></td>
             </tr>   
             <tr>
-                <td><h4 class="" >Enter Marks for Chem</h4></td>
+                <td><h4 class="" > Chem</h4></td>
                 <td><input type="number" name="" id="marks-chem"></td>
             </tr>
             <tr>
-                <td> <h4 class="" >Enter Marks for Physics</h4></td>
+                <td> <h4 class="" > Physics</h4></td>
                 <td><input type="number" name="" id="marks-phy"></td>
             </tr>
             <tr>
                 
-                <td colspan="2"><button class="btn btn-outline-success btn-lg" type="submit">Generate</button></td>
+                <td colspan="2"><button class="btn btn-outline-success btn-lg" type="submit" onclick="calc()">Generate</button></td>
             </tr>
         </table>
         
-       
-      
-        
+         
        
     </div>
 
 
+    <div class="container mt-5">
+
+        <div class="container text-center">
+            <h2>GRADE SHEET</h2>
+            <h2 id="name"></h2>
+            <h2 id="class "></h2>
+            <h2 id="highest-m"></h2>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                    <td colspan=2 class=""><h5>Student Name: <span></span></h5>	  </td>
+                    <td colspan=3 class=""><h5>Class: <span></span></h5>	  </td>                    
+                  </tr>
+                <tr>
+                  <th>No.</th>
+                  <th>Subjects</th>
+                  <th>Marks Scored</th>
+                  <th>Total Marks</th>
+                  <th>Percentage (%)</th>
+                <tr>  
+              </thead>
+              <tbody>
+                <tr>
+                  <td>01</td>
+                  <td>English</td>
+                  <td><span id="gr-eng"></span></td>
+                  <td>100</td>
+                  <td><span id="per-eng"></span></td>
+
+                </tr>
+                <tr>
+                  <td>02</td>
+                  <td>Math</td>
+                  <td><span id="gr-math"></span></td>
+                  <td>100</td>
+                  <td><span id="per-math"></span></td>
+
+                </tr>
+                <tr>
+                  <td>03</td>
+                  <td>Urdu</td>
+                  <td><span id="gr-urdu"></span></td>
+                  <td>100</td>
+                  <td><span id="per-urdu"></span></td>
+
+                  
+                </tr>
+                <tr>
+                  <td>04</td>
+                  <td>Chem</td>
+                  <td><span id="gr-chem"></span></td>
+                  <td>100</td>
+                  <td><span id="per-chem"></span></td>
+
+                  
+                </tr>
+                <tr>
+                  <td>05</td>
+                  <td>Physics</td>
+                  <td><span id="gr-phy"></span></td>
+                  <td>100</td>
+                  <td><span id="per-phy"></span></td>
+
+                 
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan=1>Maximum Marks: <span></span> </td>
+                  <td colspan=1>Marks Obtained: <span></span> </td>
+                  <td colspan=2>Highest: <span></span> </td>
+                  <td colspan=1>Grade: <span></span></td>
+                </tr>
+              </tfoot> 
+             
+            </table>
+    </div>
 
 
 
@@ -75,43 +150,63 @@
 
     <script>
          
-        function main() {
-            var studentnum =(document.getElementById("in-student-num").value)
+        function calc() {
+            //var studentnum =(document.getElementById("in-student-num").value)
             //console.log(studentnum)
-            var studentmarks = [];
+            //var studentmarks = [];
             
 
             // for (var i = 1; i <= studentnum; i++) {
                 
-                var inmarks = document.getElementById("input-marks");
-                inmarks.innerHTML += 'Enter Marks For Student ' + ' (Marks for each subject are out of 100) <br/>';
-                var sub = ["English", "Maths", "Urdu", "Chemistry", "Physics"]
+                //var inmarks = document.getElementById("input-marks");
+                //inmarks.innerHTML += ' Student ' + ' (Marks for each subject are out of 100) <br/>';
+                //var sub = ["English", "Maths", "Urdu", "Chemistry", "Physics"]
+
+
                 var eng = Number(document.getElementById("marks-eng").value);
                 var math = Number(document.getElementById("marks-math").value);
                 var urdu = Number(document.getElementById("marks-urdu").value);
                 var chem = Number(document.getElementById("marks-chem").value);
                 var phy = Number(document.getElementById("marks-phy").value);
 
-                // eng.innerHTML = 'Enter Marks For ' + sub[0] + '<br/>' + "<input type='number' id='in-student-eng'>";
-                // math.innerHTML = 'Enter Marks For ' + sub[1] + '<br/>' + "<input type='number' id='in-student-math'>";
-                // urdu.innerHTML = 'Enter Marks For ' + sub[2] + '<br/>' + "<input type='number' id='in-student-urdu'>";
-                // chem.innerHTML = 'Enter Marks For ' + sub[3] + '<br/>' + "<input type='number' id='in-student-chem'>";
-                // phy.innerHTML = 'Enter Marks For ' + sub[4] + '<br/>' + "<input type='number' id='in-student-phy'>";
+                let total = eng + math + urdu + chem + phy;
+                let per = (total / 500) * 100;
+                let marks = [eng,math,urdu,chem,phy];
+                let perarr = [];
+                let highest = 0;
+                for (let i = 0; i < marks.length; i++) {
+                    if( marks[i] > highest) {
+                        highest = marks[i];
+                    }
+                    perarr.push(marks[i]/100)
+                }
+                
+                let grade;
+                if (total <= 100 && total > 79) {
+                    grade = "A+"
+                } else if  (total <= 79 && total > 69) {
+                    grade = "A"
+                } else if  (total <= 69 && total > 59) {
+                    grade = "B"
+                } else if  (total <= 59 && total > 50) {
+                    grade = "PASS"
+                } else (
+                    grade = 'FAIL'
+                )
+
+                
+
+                // eng.innerHTML = ' ' + sub[0] + '<br/>' + "<input type='number' id='in-student-eng'>";
+                // math.innerHTML = ' ' + sub[1] + '<br/>' + "<input type='number' id='in-student-math'>";
+                // urdu.innerHTML = ' ' + sub[2] + '<br/>' + "<input type='number' id='in-student-urdu'>";
+                // chem.innerHTML = ' ' + sub[3] + '<br/>' + "<input type='number' id='in-student-chem'>";
+                // phy.innerHTML = ' ' + sub[4] + '<br/>' + "<input type='number' id='in-student-phy'>";
                 // input.innerHTML = '<button type="submit" id="enter-marks" onclick="calculate()" class="btn btn-primary" >Calculate</button>';
                 
             // }
 
           
             
-            function calculate() {
-                let engmarks = Number(document.getElementById("in-student-eng").value)
-                let mathmarks = Number(document.getElementById("in-student-math").value)
-                let urdumarks = Number(document.getElementById("in-student-urdu").value)
-                let chemmarks = Number(document.getElementById("in-student-chem").value)
-                let phymarks = Number(document.getElementById("in-student-phy").value)
-                alert(engmarks);
-
-            }
 
 
 

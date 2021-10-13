@@ -67,22 +67,20 @@
     <div class="container mt-5">
 
         <div class="container text-center">
-            <h2>GRADE SHEET</h2>
-            <h2 id="name"></h2>
-            <h2 id="class "></h2>
-            <h2 id="highest-m"></h2>
+            <h2>MARKS SHEET</h2>
+            
             <table class="table table-striped">
               <thead>
                 <tr>
-                    <td colspan=2 class=""><h5>Student Name: <span></span></h5>	  </td>
-                    <td colspan=3 class=""><h5>Class: <span></span></h5>	  </td>                    
+                    <td colspan=2 class=""><h5>Student Name: <span id="name"></span></h5>	  </td>
+                    <td colspan=3 class=""><h5>Class: <span id="class-m"></span >  </h5>	  </td>                    
                   </tr>
                 <tr>
                   <th>No.</th>
                   <th>Subjects</th>
                   <th>Marks Scored</th>
                   <th>Total Marks</th>
-                  <th>Percentage (%)</th>
+                  <th>Grade</th>
                 <tr>  
               </thead>
               <tbody>
@@ -132,10 +130,11 @@
               </tbody>
               <tfoot>
                 <tr>
-                  <td colspan=1>Maximum Marks: <span></span> </td>
-                  <td colspan=1>Marks Obtained: <span></span> </td>
-                  <td colspan=2>Highest: <span></span> </td>
-                  <td colspan=1>Grade: <span></span></td>
+                <td colspan=1>Marks Obtained: <span id="max-marks"></span> </td>
+                  <td colspan=1>Percentage: <span id="per-marks"></span></td>
+                  
+                  <td colspan=2>Highest: <span id="high"></span> </td>
+                  <td colspan=1 ><b>GRADE:</b>  <span id="grade"></span></td>
                 </tr>
               </tfoot> 
              
@@ -162,15 +161,36 @@
                 //inmarks.innerHTML += ' Student ' + ' (Marks for each subject are out of 100) <br/>';
                 //var sub = ["English", "Maths", "Urdu", "Chemistry", "Physics"]
 
+                let name = document.getElementById("s-name").value
+                let cl = Number(document.getElementById("class").value) 
+                document.getElementById("name").innerText = name.toUpperCase()
+                document.getElementById("class-m").innerText = (cl + "th");
 
                 var eng = Number(document.getElementById("marks-eng").value);
+                document.getElementById("gr-eng").innerText = eng;
+
                 var math = Number(document.getElementById("marks-math").value);
+                document.getElementById("gr-math").innerText = math;
+
                 var urdu = Number(document.getElementById("marks-urdu").value);
+                document.getElementById("gr-urdu").innerText = urdu;
+
                 var chem = Number(document.getElementById("marks-chem").value);
+                document.getElementById("gr-chem").innerText = chem;
+
                 var phy = Number(document.getElementById("marks-phy").value);
+                document.getElementById("gr-phy").innerText = phy;
+
 
                 let total = eng + math + urdu + chem + phy;
+                console.log("total: ", total)
+                document.getElementById("max-marks").innerText = total;
+
                 let per = (total / 500) * 100;
+                console.log("per-total: ", per)
+
+                document.getElementById("per-marks").innerText = per;
+
                 let marks = [eng,math,urdu,chem,phy];
                 let perarr = [];
                 let highest = 0;
@@ -178,8 +198,26 @@
                     if( marks[i] > highest) {
                         highest = marks[i];
                     }
-                    perarr.push(marks[i]/100)
+                    if (marks[i] <= 100 && marks[i] > 79) {
+                        perarr[i] = "A+"
+                } else if  (marks[i] <= 79 && marks[i] > 69) {
+                    perarr[i] = "A"
+                } else if  (marks[i] <= 69 && marks[i] > 59) {
+                    perarr[i] = "B"
+                } else if  (marks[i] <= 59 && marks[i] > 50) {
+                    perarr[i] = "PASS"
+                } else (
+                    perarr[i] = 'FAIL'
+                )  
                 }
+                console.log("per-arr: ", perarr)
+
+                document.getElementById("high").innerText = highest;
+                document.getElementById("per-eng").innerText = perarr[0];
+                document.getElementById("per-math").innerText = perarr[1];
+                document.getElementById("per-urdu").innerText = perarr[2];
+                document.getElementById("per-chem").innerText = perarr[3];
+                document.getElementById("per-phy").innerText = perarr[4];
                 
                 let grade;
                 if (total <= 100 && total > 79) {
@@ -193,6 +231,7 @@
                 } else (
                     grade = 'FAIL'
                 )
+                document.getElementById("grade").innerText = grade;
 
                 
 
